@@ -1,0 +1,82 @@
+/* 
+### 1. Gray Shades: 
+   - Light Gray (#E0E0E0): Perfect for subtle backgrounds and borders.
+   - Dark Gray (#333333): Good for text that needs to stand out without using full black.
+
+### 2. Muted Colors:
+   - Muted Blue (#3A3A55): Works well as an accent color for buttons or links.
+   - Muted Green (#4A6A4A): Adds a calm, organic feel, great for success messages or subtle highlights.
+   - Muted Orange (#B56A45): Warm and inviting, ideal for call-to-action buttons or icons.
+
+### 3. Soft Pastels:
+   - Soft Pink (#F2D7D5): Gentle and soothing, great for highlighting sections.
+   - Pale Yellow (#FFF9C4): Adds a subtle warmth, useful for background highlights or notifications.
+   - Cool Mint (#D1E8E2): Refreshing and light, perfect for accents and dividers.
+
+### 4. Vibrant Accent (use sparingly):
+   - Electric Blue (#007BFF): Excellent for actionable elements like buttons or important links.
+   - Bright Red (#FF4C4C): Ideal for alerts or critical actions.
+
+For a dark mode design that complements your black and white theme, you’ll want to use colors that maintain readability and contrast while being easy on the eyes. Here are some suggestions:
+
+### 1. Primary Background & Text Colors:
+   - Background: 
+     - Dark Gray (#1A1A1A): A deep, neutral gray that isn’t completely black, reducing eye strain.
+     - Near-Black (#121212): A very dark gray, almost black, which is commonly used in dark mode designs.
+   - Primary Text: 
+     - White (#FFFFFF): For high contrast against dark backgrounds.
+     - Light Gray (#E0E0E0): For less intense contrast, easier on the eyes for long reading sessions.
+
+### 2. Secondary Backgrounds & Elements:
+   - Dark Gray (#2C2C2C): For secondary elements like sidebars, cards, or menus.
+   - Medium Gray (#3A3A3A): Ideal for dividers, borders, or secondary backgrounds.
+
+### 3. Accent Colors:
+   - Muted Blue (#3A3A55): Works well for links, buttons, and interactive elements.
+   - Teal (#4DB6AC): A cool, calming accent color that works well in dark mode.
+   - Soft Orange (#FF8A65): Adds warmth and can be used for highlights or important actions.
+
+### 4. Desaturated Colors:
+   - Desaturated Purple (#7E57C2): Adds a subtle, sophisticated touch for less prominent elements.
+   - Desaturated Green (#81C784): Good for success indicators or less intrusive accents.
+
+### 5. Highlight & Alert Colors:
+   - Bright Blue (#007BFF): For actionable elements like primary buttons or active states.
+   - Soft Red (#E57373): For error messages or warnings without being too harsh.
+   - Amber (#FFC107): For warnings or important notifications.
+
+### 6. Shadows & Depth:
+   - Soft Black (#000000, with low opacity): Use sparingly to add depth to elements like modals or dropdowns. 
+*/
+
+:root {
+   --dark-gray: #1A1A1A;
+   --light-gray: #E0E0E0;
+   --muted-blue: #3A3A55;
+   --muted-green: #4A6A4A;
+   --muted-orange: #B56A45;
+   --soft-pink: #F2D7D5;
+   --pale-yellow: #FFF9C4;
+   --cool-mint: #D1E8E2;
+   --electric-blue: #007BFF;
+   --bright-red: #FF4C4C;
+   --dark-primary-background: #1A1A1A;
+   --dark-primary-text: #FFFFFF;
+   --dark-secondary-background: #2C2C2C;
+   --medium-gray: #3A3A3A;
+   --teal: #4DB6AC;
+   --soft-orange: #FF8A65;
+   --desatured-purple: #7E57C2;
+   --desaturated-green: #81C784;
+   --soft-red: #E57373;
+   --amber: #FFC107;
+   --black: #000000;
+   --shadow: rgba(0, 0, 0, 0.2);
+
+   --blue: #3859ff;
+   --dark-blue: #18191d;
+   --yellow: #ffda35;
+   --green: #00CC99;
+   --red: #FF0000;
+   --white: #FFFFFF;
+}
