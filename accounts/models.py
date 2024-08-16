@@ -3,7 +3,7 @@ from django.contrib.auth.models import AbstractUser
 
 from datetime import timedelta
 
-from boards.models import Board
+# from boards.models import Board
 
 
 class SubscriptionPlan(models.Model):
@@ -23,7 +23,7 @@ class SubscriptionPlan(models.Model):
 class CustomUser(AbstractUser):
     avatar = models.ImageField(upload_to='avatars/', null=True, blank=True)
     industry = models.ForeignKey('Industry', on_delete=models.SET_NULL, null=True, related_name='users')
-    role = models.ForeignObject('Role', on_delete=models.SET_NULL, null=True, related='users')
+    role = models.ForeignKey('Role', on_delete=models.SET_NULL, null=True, related_name='users')
     
     def __str__(self):
         return self.username
@@ -59,7 +59,7 @@ class UserSubscription(models.Model):
 
 class StarredBoard(models.Model):
     user = models.ForeignKey(CustomUser, on_delete=models.CASCADE, related_name='starred_boards')
-    board = models.ForeignKey(Board, on_delete=models.CASCADE, related_name='starred_by')
+    board = models.ForeignKey('boards.Board', on_delete=models.CASCADE, related_name='starred_by')
     created_at = models.DateTimeField(auto_now_add=True)
     
     def __str__(self):

@@ -38,8 +38,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     # 3rd party apps
-    'rest_framework'
-    'djoser'
+    'rest_framework',
+    'djoser',
     'drf_spectacular',
     'django_cleanup',
     # local apps
@@ -155,5 +155,6 @@ SPECTACULAR_SETTINGS = {
     'TITLE': 'Board API',
     'DESCRIPTION': 'This is a API for managing boards, teams, and users.',
     'VERSION': '1.0.0',
+    'SCHEMA_PATH_PREFIX': r'/api/v1/(?P<app_name>[^/]+)/',
 }
 

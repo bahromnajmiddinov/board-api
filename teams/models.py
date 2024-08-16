@@ -7,7 +7,7 @@ class Team(models.Model):
     name = models.CharField(max_length=100)
     logo = models.ImageField(upload_to='team_logos/', null=True, blank=True)
     description = models.TextField(null=True, blank=True)
-    owner = models.ForeignKey(CustomUser, related_name='teams', on_delete=models)
+    owner = models.ForeignKey(CustomUser, related_name='teams', on_delete=models.PROTECT)
     members = models.ManyToManyField(CustomUser, related_name='team_memberships', through='TeamMembership')
     
     # Timestamps

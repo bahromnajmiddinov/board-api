@@ -28,14 +28,15 @@ api_urlpatterns = [
     path('accounts/', include('accounts.urls')),
     path('boards/', include('boards.urls')),
     path('teams/', include('teams.urls')),
+    
+    # Spectacular API endpoint
+    path('schema/', SpectacularAPIView.as_view(), name='schema'),
+    path('schema/swagger-ui/', SpectacularSwaggerView.as_view(url_name='schema')),
 ]
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     
-    # Spectacular API endpoint
-    path('schema/', SpectacularAPIView.as_view(), name='schema'),
-    path('schema/swagger-ui/', SpectacularSwaggerView.as_view(url_name='schema')),
     
     # Api endpoints
     path('api/v1/', include(api_urlpatterns)),

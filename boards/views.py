@@ -1,16 +1,32 @@
 from rest_framework.views import APIView
 from rest_framework.response import Response
+from rest_framework.generics import ListCreateAPIView, RetrieveUpdateDestroyAPIView
 
-from .models import Board
-from .serializers import BoardSerializer
+from drf_spectacular.utils import extend_schema
+
+from .models import Board, Project
+from .serializers import BoardSerializer, ProjectSerializer
 
 
 class BoardAPIView(APIView):
 
+    @extend_schema(
+        summary="Retrieve all boards",
+        description="This endpoint retrieves a list of all available boards.",
+        responses={200: BoardSerializer(many=True)},
+    )
+    
     def get(self, request):
         boards = Board.objects.all()
         serializer = BoardSerializer(boards, many=True)
         return Response(serializer.data)
+    
+    @extend_schema(
+        summary="Create a new board",
+        description="This endpoint allows for the creation of a new board.",
+        request=BoardSerializer,
+        responses={201: BoardSerializer, 400: 'Bad Request'}
+    )
     
     def post(self, request):
         serializer = BoardSerializer(data=request.data)
@@ -53,5 +69,16 @@ class BoardDetailAPIView(APIView):
         board = self.get_object(pk)
         board.delete()
         return Response(status=204)
+
+
+class ProjectAPIView(ListCreateAPIView):
+    serializer_class = ProjectSerializer
     
+    def get_queryset(self):
+        return Project.objects.filter(owner=self.request.user)
+
+
+class ProjectDetailAPIView(RetrieveUpdateDestroyAPIView):
+    serializer_class = ProjectSerializer
+    queryset = Project.objects.all()
     

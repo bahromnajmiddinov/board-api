@@ -6,6 +6,10 @@ from accounts.models import CustomUser
 from teams.models import Team
 
 
+class Project(models.Model):
+    owner = models.ForeignKey(CustomUser, on_delete=models.CASCADE, related_name='projects')
+    boards = models.ManyToManyField('Board', related_name='projects')
+
 class Board(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid4, editable=False)
     title = models.CharField(max_length=100)
@@ -22,7 +26,6 @@ class Board(models.Model):
         indexes = [
             models.Index(fields=['created_at', 'updated_at']),
             models.Index(fields=['title', 'is_public']),
-            models.Index(fields=['participants']),
             models.Index(fields=['created_by']),
             models.Index(fields=['created_at']),
             models.Index(fields=['updated_at']),
@@ -58,7 +61,7 @@ class BoardElement(models.Model):
     rotation = models.FloatField(default=0.0)  # Rotation in degrees
 
     # Timestamps
-    created_by = models.ForeignKey('auth.User', on_delete=models.CASCADE)
+    created_by = models.ForeignKey(CustomUser, on_delete=models.CASCADE, related_name='board_elements')
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
@@ -68,7 +71,7 @@ class BoardElement(models.Model):
 
 class Comment(models.Model):
     board = models.ForeignKey(Board, on_delete=models.CASCADE, related_name='comments')
-    owner = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
+    owner = models.ForeignKey(CustomUser, on_delete=models.CASCADE, related_name='comments')
     content = models.TextField()
     color = models.CharField(max_length=7, default='#000000')
     muted = models.ManyToManyField(CustomUser, related_name='muted_comments')
@@ -81,6 +84,3 @@ class Comment(models.Model):
     def __str__(self):
         return f'{self.owner.username}: {self.content[:50]}...'
     
-
-class Project(models.Modle):
-    board = models.ManyToManyField(Board)
