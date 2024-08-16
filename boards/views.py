@@ -8,6 +8,7 @@ from .models import Board, Project
 from .serializers import BoardSerializer, ProjectSerializer
 
 
+@extend_schema(tags=["Boards"])
 class BoardAPIView(APIView):
 
     @extend_schema(
@@ -36,6 +37,7 @@ class BoardAPIView(APIView):
         return Response(serializer.errors, status=400)
 
 
+@extend_schema(tags=["Boards"])
 class BoardDetailAPIView(APIView):
     
     def get_object(self, pk):

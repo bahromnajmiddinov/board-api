@@ -155,6 +155,6 @@ SPECTACULAR_SETTINGS = {
     'TITLE': 'Board API',
     'DESCRIPTION': 'This is a API for managing boards, teams, and users.',
     'VERSION': '1.0.0',
-    'SCHEMA_PATH_PREFIX': r'/api/v1/(?P<app_name>[^/]+)/',
+    'SCHEMA_PATH_PREFIX': r'/api/v1/[^/]+/',
 }
 
