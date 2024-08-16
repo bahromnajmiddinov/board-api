@@ -9,12 +9,14 @@ from teams.models import Team
 class Project(models.Model):
     owner = models.ForeignKey(CustomUser, on_delete=models.CASCADE, related_name='projects')
     boards = models.ManyToManyField('Board', related_name='projects')
+    team = models.ForeignKey(Team, on_delete=models.CASCADE, related_name='team_projects')
 
 class Board(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid4, editable=False)
     title = models.CharField(max_length=100)
     is_public = models.BooleanField(default=False)
     participants = models.ManyToManyField(CustomUser, related_name='boards')
+    team = models.ForeignKey(Team, on_delete=models.CASCADE, related_name='team_boards')
     
     # Timestamps
     created_by = models.ForeignKey(CustomUser, on_delete=models.CASCADE)

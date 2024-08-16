@@ -6,4 +6,4 @@ from .models import CustomUser
 class CustomUserSerializer(serializers.ModelSerializer):
     class Meta:
         model = CustomUser
-        fields = '__all__'
+        exclude = ['password', 'groups', 'is_superuser', 'user_permissions', 'is_staff']
