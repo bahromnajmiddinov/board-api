@@ -2,8 +2,9 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework.generics import ListCreateAPIView, RetrieveUpdateDestroyAPIView
 
-from drf_spectacular.utils import extend_schema
+from drf_spectacular.utils import extend_schema, OpenApiParameter
 
+from teams.models import Team
 from .models import Board, Project
 from .serializers import BoardSerializer, ProjectSerializer
 
@@ -14,11 +15,22 @@ class BoardAPIView(APIView):
     @extend_schema(
         summary="Retrieve all boards",
         description="This endpoint retrieves a list of all available boards.",
+        parameters=[
+            OpenApiParameter(name='type', description='Get public or requested user`s boards,' \
+                             'default public, public|private', required=False, type=str),
+        ],
         responses={200: BoardSerializer(many=True)},
     )
     
     def get(self, request):
-        boards = Board.objects.all()
+        type = request.GET.get('type', 'public')
+        team_id = request.GET.get('teamId')
+        
+        if type == 'private':
+            boards = Board.objects.filter(participants_in=[request.user])
+        elif type == 'public':
+            boards = Board.objects.filter(is_public=True)
+
         serializer = BoardSerializer(boards, many=True)
         return Response(serializer.data)
     
