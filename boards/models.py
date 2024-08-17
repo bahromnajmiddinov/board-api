@@ -51,7 +51,6 @@ class BoardElement(models.Model):
     board = models.ForeignKey(Board, related_name='elements', on_delete=models.CASCADE)
     element_type = models.CharField(max_length=50)  # e.g., 'rectangle', 'circle', 'text'
     content = models.TextField(null=True, blank=True)  # Content like text or image URL
-    team = models.ForeignKey(Team, related_name='boards', on_delete=models.CASCADE, null=True, blank=True)
     
     # Position fields
     x_position = models.FloatField()  # X coordinate
@@ -61,6 +60,8 @@ class BoardElement(models.Model):
     width = models.FloatField()
     height = models.FloatField()
     rotation = models.FloatField(default=0.0)  # Rotation in degrees
+    style = models.JSONField(null=True, blank=True)  # Additional styles like color
+    metadata = models.JSONField(null=True, blank=True)  # Additional metadata
 
     # Timestamps
     created_by = models.ForeignKey(CustomUser, on_delete=models.CASCADE, related_name='board_elements')
